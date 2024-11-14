@@ -1,0 +1,12 @@
+.container{
+    height: 100vh;
+    
+    display: flex;
+}
+
+.Routes{
+    border: blue solid 2px;
+
+    height: 88vh;
+
+}
