@@ -10,12 +10,17 @@
 }
 
 .side_panel_nav{
-    height: 6vh;
+    height: 10vh;
     border: red dotted 2px;
 }
 
 .journal-container{
     height: 40vh;
+    width: 80%;
     border: red dotted 2px;
 }
 
+.journal-entries{
+    border: blue dotted 2px;
+    height: 80%;
+}

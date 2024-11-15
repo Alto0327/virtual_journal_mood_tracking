@@ -12,5 +12,7 @@ ul{
 
 body{
   background-color: rgb(33, 33, 33);
+  color: whitesmoke;
+
   height: 100vh;
 }
