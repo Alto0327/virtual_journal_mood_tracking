@@ -1,4 +1,4 @@
-const JournalsSearch= ({notes}) =>{
+const JournalsSearch= () =>{
     return(
         <div className="journal-container">
             <form>
@@ -12,9 +12,6 @@ const JournalsSearch= ({notes}) =>{
             </form>
             <div className="journal-entries">
                 <p>Journals will be here</p>
-                {notes.map((note, index) =>(
-                    <div key={index}> {note.title} </div>
-                ))}
             </div>
         </div>
     )

@@ -6,25 +6,19 @@ import Authentication from "./pages/Login-Signup/Authentication";
 import Footer from "./components/Footer/Footer";
 import SidePanel from "./components/SidePanel/SidePanel";
 import Chart from "./components/MoodChart/Chart"
-import { useState } from "react";
 
 function App() {
-  const [notes, setNotes] = useState([])
-
-  const handleSave = (note) => {
-    setNotes([...notes, note])
-  }
 
 
   return (
     <div className="container">
       <Router>
-        <SidePanel note={notes}/>
+        <SidePanel/>
         <div className="main-content">
           <Navbar />
           <div className="Routes">
             <Routes >
-              <Route index element={<Home onSave={handleSave} />} />
+              <Route index element={<Home/>} />
               <Route path="chart" element={<Chart/>} />
               <Route path="init" element={<Authentication />} />
           </Routes>

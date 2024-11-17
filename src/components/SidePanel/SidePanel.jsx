@@ -3,7 +3,7 @@ import Logo from "../../assets/Logo-White.png"
 import JournalsSearch from './JournalsSearch'
 import Chart from '../MoodChart/Chart'
 
-function SidePanel({note}){
+function SidePanel(){
     return(
         <div className='SidePanel'>
             <div className='side_panel_nav'>
@@ -11,7 +11,7 @@ function SidePanel({note}){
 
             </div>
 
-            <JournalsSearch notes={note}/>
+            <JournalsSearch/>
             
             <Chart/>
 
