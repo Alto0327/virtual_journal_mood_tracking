@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home/Home";
+import Main from "./pages/Home/Main";
 import Navbar from "./components/Navbar/Navbar";
 import Authentication from "./pages/Login-Signup/Authentication";
 import Footer from "./components/Footer/Footer";
@@ -18,7 +18,7 @@ function App() {
           <Navbar />
           <div className="Routes">
             <Routes >
-              <Route index element={<Home/>} />
+              <Route index element={<Main/>} />
               <Route path="chart" element={<Chart/>} />
               <Route path="init" element={<Authentication />} />
           </Routes>

@@ -1,16 +1,14 @@
 import { useState, useEffect } from 'react'
 import './Home.css' 
 
-function Home() {
+function Main() {
 
 
     return (
         <div className='Home'>
-            <input/>
-            <textarea>
-            </textarea>
+            <h1>This is the homeScreen</h1>
         </div>
     )
 }
 
-export default Home
+export default Main
