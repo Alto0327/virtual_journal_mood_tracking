@@ -1,30 +1,22 @@
 import { useState } from 'react'
-import { auth } from '../../firebase'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import useSignUp from '../../Hooks/useSignUp'
 
 function SignUp () {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const onSubmit = async (e) => {
-        e.preventDefault()
 
-        await createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user
-                console.log("user: ",user," Signed up")
-            })
-            .catch((error) =>{
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.error(errorCode, errorMessage)
-            })
+    const {SignUp, loading, error, currentUser} = useSignUp()
+
+    const handleSignUp = (e) => {
+        e.preventDefault()
+        SignUp(email, password)
     }
 
     return (
         <div>
             <h1>SignUp</h1>
-                <form>
+                <form onSubmit={handleSignUp}>
                     <div>
                         <label htmlFor="email-address">
                             Email
@@ -51,8 +43,13 @@ function SignUp () {
                             required
                         />
                     </div>
-                    <button type='submit' onClick={onSubmit}>Create</button>
+                    <button type='submit' disabled={loading}>
+                        {loading ? "Creating..." : "Create"}
+                    </button>
                 </form>
+                {error && <p style={{ color: "red" }}>{error}</p>}
+                {currentUser ? <h1>Welcome, {currentUser.email}</h1> : null}
+
         </div>
     )
 }

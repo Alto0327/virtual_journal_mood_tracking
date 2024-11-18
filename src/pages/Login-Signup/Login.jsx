@@ -1,61 +1,47 @@
 import { useState } from "react"
-import { signInWithEmailAndPassword } from "firebase/auth"
-import { auth } from "../../firebase"
-import { Link } from "react-router-dom"
+import useLogin from "../../Hooks/useLogin"
 
 function Login(){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const handleLogin = async(e) => {
-        e.preventDefault()
+    const {login, currentUser, error, loading} = useLogin()
 
-        await signInWithEmailAndPassword(auth, email, password)
-        .then((userCredentials) =>{
-            const user = userCredentials.user
-            console.log(user)
-        })
-        .catch((error)=>{
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.error(errorCode, errorMessage)
-        })
-    }
+    const handleLogin = (e) => {
+        e.preventDefault();
+        login(email, password);
+      };
 
 
     return(
         <div>
             <h1>LOGIN</h1>
-            <form>
+            <form onSubmit={handleLogin}>
                 <div>
-                    <label htmlFor="">
-                        Email
-                    </label>
-                    <input 
+                    <label htmlFor="email">Email</label>
+                    <input
                         type="text"
-                        label="Email Address"
                         placeholder="Enter Email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
                 <div>
-                    
-                    <label htmlFor="">
-                        Password
-                    </label>
-                    <input 
-                        type="text"
-                        label="password"
+                    <label htmlFor="password">Password</label>
+                    <input
+                        type="password"
                         placeholder="Enter Password"
                         value={password}
-                        onChange={(e)=> setPassword(e.target.value)}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
-
-                <button type="submit" onClick={handleLogin}> login</button>
+                <button type="submit" disabled={loading}>
+                    {loading ? "Logging in..." : "Login"}
+                </button>
             </form>
-        </div>
+            {error && <p style={{ color: "red" }}>{error}</p>}
+            {currentUser ? <h1>Welcome, {currentUser.email}</h1> : null}
+      </div>
     )
 }
 
