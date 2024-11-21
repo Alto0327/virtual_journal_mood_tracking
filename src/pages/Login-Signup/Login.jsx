@@ -1,11 +1,11 @@
 import { useState } from "react"
-import useLogin from "../../Hooks/useLogin"
+import useAuthentication from "../../Hooks/useAuthentication"
 
 function Login(){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const {login, currentUser, error, loading} = useLogin()
+    const {login, currentUser, error, loading} =useAuthentication()
 
     const handleLogin = (e) => {
         e.preventDefault();
