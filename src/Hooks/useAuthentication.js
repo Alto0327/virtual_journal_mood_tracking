@@ -1,11 +1,14 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 import { auth } from "../firebase"
 import { useState } from "react"
+import { useNavigate } from 'react-router-dom';
 
 function useAuthentication(){
     const [currentUser, setCurrentUser] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+
+    let navigate = useNavigate()
 
     const login = async (email, password) => {
         setLoading(true);
@@ -51,6 +54,7 @@ function useAuthentication(){
             setError(err.message);
         } finally {
             setLoading(false);
+            navigate("/init")
         }
     };
     

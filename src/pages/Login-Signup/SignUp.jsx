@@ -1,16 +1,20 @@
 import { useState } from 'react'
 import useAuthentication from '../../Hooks/useAuthentication'
+import { useNavigate } from "react-router-dom"
+
 
 function SignUp () {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    let navigate = useNavigate()
 
     const {signUp, loading, error, currentUser} = useAuthentication()
 
     const handleSignUp = (e) => {
         e.preventDefault()
         signUp(email, password)
+        navigate("/")
     }
 
     return (

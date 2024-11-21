@@ -1,15 +1,19 @@
 import { useState } from "react"
 import useAuthentication from "../../Hooks/useAuthentication"
+import { useNavigate } from "react-router-dom"
 
 function Login(){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    let navigate = useNavigate()
 
     const {login, currentUser, error, loading} =useAuthentication()
 
     const handleLogin = (e) => {
         e.preventDefault();
         login(email, password);
+        navigate("/")
       };
 
 
