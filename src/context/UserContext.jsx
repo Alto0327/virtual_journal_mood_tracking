@@ -1,15 +1,12 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { auth } from '../firebase'; // Assuming Firebase is set up
+import { auth } from '../firebase'; 
 import { onAuthStateChanged } from 'firebase/auth';
 
-// Create a context
 const UserContext = createContext();
 
-// Create a provider component
 export const UserProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
 
-    // Monitor user state changes with Firebase
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -19,7 +16,6 @@ export const UserProvider = ({ children }) => {
             }
         });
 
-        // Cleanup subscription on unmount
         return () => unsubscribe();
     }, []);
 
