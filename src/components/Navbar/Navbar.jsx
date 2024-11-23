@@ -26,7 +26,7 @@ function Navbar() {
             </ul>
             <h1>            {currentUser ? (
                 <div>
-                    <p>Welcome, {currentUser.displayName || currentUser.email}</p>
+                    <p>Welcome, {currentUser.email}</p>
                     <button onClick={logout} disabled={loading}>
                         {loading ? "Logging out..." : "Logout"}
                     </button>

@@ -5,11 +5,12 @@ import { db, auth } from "../firebase";
 function useJournal() {
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
-  const userId = auth.currentUser?.uid; // Get the currently logged-in user's ID
+  const userId = auth.currentUser?.uid; 
 
-  // Fetch all journal entries for the logged-in user
+
+
   const fetchJournalEntries = async () => {
-    if (!userId) return; // Exit if no user is logged in
+    if (!userId) return;
     setLoading(true);
     try {
       const journalRef = collection(db, "users", userId, "journalEntries");
@@ -26,9 +27,8 @@ function useJournal() {
     }
   };
 
-  // Create a new journal entry
   const createJournalEntry = async (title, content, date = new Date()) => {
-    if (!userId) return; // Exit if no user is logged in
+    if (!userId) return; 
     const journalRef = collection(db, "users", userId, "journalEntries");
     try {
       const newDocRef = await addDoc(journalRef, {
@@ -36,7 +36,6 @@ function useJournal() {
         title: title || "Untitled",
         content: content || "",
       });
-      // Update local state
       setEntries(prevEntries => [
         ...prevEntries,
         { id: newDocRef.id, date: date.toISOString(), title, content },
@@ -46,13 +45,11 @@ function useJournal() {
     }
   };
 
-  // Update an existing journal entry
   const updateJournalEntry = async (entryId, updatedData) => {
-    if (!userId) return; // Exit if no user is logged in
+    if (!userId) return; 
     const entryRef = doc(db, "users", userId, "journalEntries", entryId);
     try {
       await updateDoc(entryRef, updatedData);
-      // Update local state
       setEntries(prevEntries =>
         prevEntries.map(entry =>
           entry.id === entryId ? { ...entry, ...updatedData } : entry
@@ -63,20 +60,17 @@ function useJournal() {
     }
   };
 
-  // Delete a journal entry
   const deleteJournalEntry = async (entryId) => {
-    if (!userId) return; // Exit if no user is logged in
+    if (!userId) return; 
     const entryRef = doc(db, "users", userId, "journalEntries", entryId);
     try {
       await deleteDoc(entryRef);
-      // Update local state
       setEntries(prevEntries => prevEntries.filter(entry => entry.id !== entryId));
     } catch (error) {
       console.error("Error deleting journal entry:", error.message);
     }
   };
 
-  // Fetch entries on initial render or when the user changes
   useEffect(() => {
     fetchJournalEntries();
   }, [userId]);
