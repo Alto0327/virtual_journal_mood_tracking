@@ -5,13 +5,18 @@ import { Link } from 'react-router-dom'
 import useJournal from '../../Hooks/useJournal'
 
 
-function Main() {
+function Home() {
   const { currentUser } = useContext(UserContext)  
   const { entries, createJournalEntry,updateJournalEntry } = useJournal()
   const [newEntry, setNewEntry] = useState({ title: "", content: "", date: new Date().toISOString().split("T")[0] });
 
   const handleCreate = () => {
-    createJournalEntry(newEntry.title, newEntry.content, new Date(newEntry.date));
+    createJournalEntry({
+      title: newEntry.title,
+      content: newEntry.content,
+      date: new Date(newEntry.date)
+
+    });
     setNewEntry({ title: "", content: "", date: new Date().toISOString().split("T")[0] });
   };
 
@@ -21,7 +26,7 @@ function Main() {
         (
         <div>
             <h1>Welcome in</h1>
-            {entries == null ? 
+            {entries && entries.length > 0 ? 
               (
                 <ul>
                   {entries.map(entry => (
@@ -65,4 +70,4 @@ function Main() {
   )
 }
 
-export default Main
+export default Home
