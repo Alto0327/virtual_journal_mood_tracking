@@ -28,6 +28,7 @@ function Login(){
                         placeholder="Enter Email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        required
                     />
                 </div>
                 <div>
@@ -37,6 +38,7 @@ function Login(){
                         placeholder="Enter Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        required
                     />
                 </div>
                 <button type="submit" disabled={loading}>
