@@ -10,7 +10,6 @@ function useJournal(){
     
     const fetchJournalEntry = async() =>{
         if(!userId) return
-        setLoading(true)
         try{
             const journalRef = collection(db, "users", userId, "journalEntries");
             const querySnapshot = await getDocs(journalRef)
@@ -25,7 +24,7 @@ function useJournal(){
 
     }
 
-    const createJournalEntry = async() => {
+    const createJournalEntry = async({date, title, content}) => {
         if(!userId) return
         const journalRef = collection(db, "users", userId, "journalEntries");
         try{
@@ -60,7 +59,7 @@ function useJournal(){
 
     useEffect(() => {
         fetchJournalEntry();
-      }, [userId]);
+      }, [userId,updateJournalEntry]);
 
 
     return{
