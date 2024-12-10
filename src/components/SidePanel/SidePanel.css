@@ -23,4 +23,15 @@
 .journal-entries{
     border: blue dotted 2px;
     height: 80%;
+    width: 100%;
+    overflow-y: scroll;
 }
+
+.journal-entries li h3 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 90%; 
+    display: block;
+}
+
