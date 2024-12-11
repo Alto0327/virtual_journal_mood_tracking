@@ -2,17 +2,20 @@ import { useState, useEffect, useContext } from "react";
 import UserContext from "../../context/UserContext";
 import useJournal from "../../Hooks/useJournal";
 
-const JournalsSearch = () => {
+const JournalsSearch = ({curEntry, setCurEntry}) => {
 const { currentUser } = useContext(UserContext)
-const { entries, createJournalEntry, updateJournalEntry } = useJournal()
+const { entries } = useJournal()
 
-
-
+  const handle_set_entry = (entry) =>{
+    setCurEntry(entry)
+  }
+  console.log(curEntry)
   return (
     <div className="journal-container">
       <form>
         <label>
           <h4>Search Journal</h4>
+          <p>{curEntry ? curEntry.title : "No entry selected"}</p>
         </label>
         <input/>
        
@@ -25,12 +28,13 @@ const { entries, createJournalEntry, updateJournalEntry } = useJournal()
                 (
                   <ul>
                     {entries.map(entry => (
-                      <li key={entry.id}>
+                      <button key={entry.id} onClick={() => handle_set_entry(entry)}>
                         <h3>{entry.title}</h3>
                         <small>{new Date(entry.date).toLocaleDateString()}</small>
-                      </li>
+                      </button>
                     ))}
                   </ul>
+                  
             ):(
                 <h1>no value</h1>
             )}

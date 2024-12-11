@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom'
 import useJournal from '../../Hooks/useJournal'
 
 
-function Home() {
+function Home({curEntry}) {
   const { currentUser } = useContext(UserContext)  
-  const { entries, createJournalEntry, updateJournalEntry } = useJournal()
+  const {createJournalEntry, updateJournalEntry } = useJournal()
   const [newEntry, setNewEntry] = useState({ title: "", content: "", date: new Date().toISOString().split("T")[0] });
 
   const handleCreate = () => {
@@ -20,12 +20,22 @@ function Home() {
     setNewEntry({ title: "", content: "", date: new Date().toISOString().split("T")[0] });
   };
 
+
   return (
     <div>
       {currentUser !== null ? 
         (
         <div>
           <h1>Welcome in</h1>
+          {curEntry ? (
+          <div>
+            <h3>{curEntry.title}</h3>
+            <p>{curEntry.content}</p>
+            <small>{curEntry.date.split("T")[0]}</small>
+          </div>
+        ) : (
+          <p>No entry selected</p>
+        )}
           <input
             type="text"
             placeholder="Title"
